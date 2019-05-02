@@ -1,0 +1,16 @@
+[
+{
+  "modid": "squeezerpatch",
+  "name": "Squeezer Patch",
+  "description": "A fix for the ID squeezer.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Shadows_of_Fire"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,66 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+
+version = "1.12.2-1.0.0"
+group= "shadows.squeezer"
+archivesBaseName = "SqueezerPatch"
+
+sourceCompatibility = targetCompatibility = "1.8"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2768"
+    runDir = "run"
+    mappings = "stable_39"
+	makeObfSourceJar = false
+}
+
+repositories {
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+	maven {
+		url "http://tehnut.info/maven"
+	}
+	maven {
+		url "https://oss.jfrog.org/artifactory/simple/libs-release"
+	}
+}
+
+dependencies {
+	deobfCompile "mezz.jei:jei_1.12.2:+"
+	deobfCompile "mcp.mobius.waila:Hwyla:1.8.+"
+	deobfCompile "org.cyclops.integrateddynamics:IntegratedDynamics:1.12.2-1.+"
+	deobfCompile "org.cyclops.commoncapabilities:CommonCapabilities:1.12.2-2.+"
+}
+
+processResources
+{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+        attributes 'FMLCorePlugin': 'shadows.squeezer.SqueezerCore'
+    }
+}
